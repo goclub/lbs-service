@@ -1,0 +1,24 @@
+keys:
+  - key: 腾讯Lbs密钥1
+    limit: 10000
+    api:
+      /ws/geocoder/v1/?location=*:
+        limit: 10000
+      /ws/location/v1/ip:
+        limit: 10000
+  - key: 腾讯Lbs密钥2
+    limit: 10000
+    api:
+      /ws/geocoder/v1/?location=*:
+        limit: 10000
+      /ws/location/v1/ip:
+        limit: 10000
+mysql:
+  user: root
+  password: somepass
+  host: localhost
+  port: 3306
+  db: test
+auth_keys:
+  - "请求密钥1"
+  - "请求密钥2"
