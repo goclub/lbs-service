@@ -157,8 +157,8 @@ func qqwryParse(ip string) (result QqwryResult, err error) {
 	}
 	result.ISP = isp
 	for key, value := range ispCodeMap {
-		if strings.Contains(city, value) {
-			result.ISP = key
+		if strings.Contains(city, key) {
+			result.ISP = value
 			break
 		}
 	}
