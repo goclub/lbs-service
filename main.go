@@ -157,9 +157,12 @@ func qqwryParse(ip string) (result QqwryResult, err error) {
 	}
 	var isp string
 	var city string
-	if city, isp, err = qqwry.QueryIP(ip); err != nil {
+	var loc *qqwry.Location
+	if loc, err = qqwry.QueryIP(ip); err != nil {
 		return
 	}
+	isp = loc.ISP
+	city = loc.City
 	result.Raw.ISP = isp
 	result.Raw.City = city
 	r, hasR := tlbsDistrict.RelationshipByAddress(city)
