@@ -7,17 +7,20 @@ import (
 	xerr "github.com/goclub/error"
 	xhttp "github.com/goclub/http"
 	xjson "github.com/goclub/json"
+	"github.com/goclub/qqwry"
 	sl "github.com/goclub/slice"
 	sq "github.com/goclub/sql"
 	xtime "github.com/goclub/time"
 	tlbs "github.com/goclub/tlbs"
-	"github.com/xiaoqidun/qqwry"
 	"gopkg.in/yaml.v3"
 	"io/ioutil"
+	"log"
 	"net/http"
 	"net/url"
 	"strconv"
 	"strings"
+	"sync"
+	"time"
 )
 
 func main() {
@@ -53,6 +56,14 @@ func init() {
 		panic(err)
 	}
 	httpClient = xhttp.NewClient(nil)
+	go func() {
+		for {
+			time.Sleep(time.Minute)
+			qqwry.SetLocationCache(&sync.Map{})
+			log.Println("clear location cache")
+			time.Sleep(time.Hour)
+		}
+	}()
 }
 func run() (err error) {
 	r := xhttp.NewRouter(xhttp.RouterOption{
